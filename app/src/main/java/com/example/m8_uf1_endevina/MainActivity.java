@@ -12,17 +12,25 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    int number = 22;
+    int number = (int) Math.floor(Math.random() * (99 - 1 + 1) + 1);
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button = (Button) findViewById(R.id.comprovar);
         TextView input = (TextView) findViewById(R.id.userNumber);
+        TextView numer = (TextView) findViewById(R.id.numero);
+        TextView registry = (TextView) findViewById(R.id.Registry);
+        TextView logs = (TextView) findViewById(R.id.Logs);
         button.setOnClickListener(new View.OnClickListener() {
+            int userTry = 0;
+
             public void onClick(View view) {
                 Context context = getApplicationContext();
                 int userGuess = Integer.valueOf(input.getText().toString());
+                userTry += 1;
+                numer.setText("Tries: "+userTry);
+                Log.v("Intento","Intento numero: "+userTry);
                 //Log.v("Algo","Este sera el numero"+R.id.userNumber);
                 if (userGuess == number) {
                     Toast.makeText(context, "Correct, you have guessed it right", Toast.LENGTH_SHORT).show();
@@ -35,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
                     //Toast.makeText(context, "The number has to be smaller!", Toast.LENGTH_SHORT).show();
                 }
+                logs.append("Your last try was "+userGuess+"\n");
+
             }
         });
     }
