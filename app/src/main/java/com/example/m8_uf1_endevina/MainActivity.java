@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         TextView numer = (TextView) findViewById(R.id.numero);
         TextView registry = (TextView) findViewById(R.id.Registry);
         TextView logs = (TextView) findViewById(R.id.Logs);
+        Button ranking = (Button) findViewById(R.id.ranking);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -66,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 }
 
+        });
+        ranking.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //Cambiar de pestana aqui
+                //Se necesitara recuperar el nombre de usuario
+            }
         });
     }
 
