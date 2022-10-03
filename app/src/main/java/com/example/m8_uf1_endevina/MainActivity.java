@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         TextView numer = (TextView) findViewById(R.id.numero);
         TextView registry = (TextView) findViewById(R.id.Registry);
         TextView logs = (TextView) findViewById(R.id.Logs);
+
         button.setOnClickListener(new View.OnClickListener() {
             int userTry = 0;
 

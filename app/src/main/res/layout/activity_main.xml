@@ -67,8 +67,8 @@
 
     <TextView
         android:id="@+id/Logs"
-        android:layout_width="258dp"
-        android:layout_height="304dp"
+        android:layout_width="257dp"
+        android:layout_height="247dp"
         android:layout_marginTop="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
