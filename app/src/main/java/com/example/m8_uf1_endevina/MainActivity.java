@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    int userTry = 0;
+    //TextView logs = (TextView) findViewById(R.id.Logs);
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -28,31 +32,40 @@ public class MainActivity extends AppCompatActivity {
         TextView logs = (TextView) findViewById(R.id.Logs);
 
         button.setOnClickListener(new View.OnClickListener() {
-            int userTry = 0;
 
             public void onClick(View view) {
+                //REVISAR PER A QUE QUAN ES FAGI CLICK A COMPROVAR BUIT NO PETI
                 Context context = getApplicationContext();
-                int userGuess = Integer.valueOf(input.getText().toString());
-                userTry += 1;
-                numer.setText("Tries: "+userTry);
-                Log.v("Intento","Intento numero: "+userTry);
-                //Log.v("Algo","Este sera el numero"+R.id.userNumber);
-                if (userGuess == number) {
+                if (input.getText() == null) {
+                    Toast.makeText(context, "You must put a number!", Toast.LENGTH_SHORT).show();
+                }
 
-                    Toast.makeText(context, "Correct, you have guessed it right", Toast.LENGTH_SHORT).show();
-                    showDialog();
-                }
-                else if (userGuess < number) {
-                    Toast.makeText(context, "The number has to be bigger!", Toast.LENGTH_SHORT).show();
-                }
                 else {
-                    Toast.makeText(context, "The number has to be smaller!", Toast.LENGTH_SHORT).show();
+                    int userGuess = Integer.valueOf(input.getText().toString());
+                    userTry += 1;
+                    numer.setText("Tries: "+userTry);
+                    logs.setMovementMethod(new ScrollingMovementMethod());
 
-                    //Toast.makeText(context, "The number has to be smaller!", Toast.LENGTH_SHORT).show();
+                    Log.v("Intento","Intento numero: "+userTry);
+                    //Log.v("Algo","Este sera el numero"+R.id.userNumber);
+                    if (userGuess == number) {
+
+                        Toast.makeText(context, "Correct, you have guessed it right", Toast.LENGTH_SHORT).show();
+                        showDialog();
+                    }
+                    else if (userGuess < number) {
+                        Toast.makeText(context, "The number has to be bigger!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(context, "The number has to be smaller!", Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(context, "The number has to be smaller!", Toast.LENGTH_SHORT).show();
+                    }
+                    logs.append("Your last try was "+userGuess+"\n");
+
                 }
-                logs.append("Your last try was "+userGuess+"\n");
+                }
 
-            }
         });
     }
 
@@ -68,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
          public void onClick(DialogInterface dialogInterface, int i) {
             number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
+            userTry = 0;
+            TextView numer = (TextView) findViewById(R.id.numero);
+            numer.setText("");
+            TextView logs = (TextView) findViewById(R.id.Logs);
+            logs.setText("");
             //Les altres variables s han de posar globals com aquesta
          }
      }).setNegativeButton("Save and close", new DialogInterface.OnClickListener() {
