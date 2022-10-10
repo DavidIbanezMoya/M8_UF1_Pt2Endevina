@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.M8_UF1_Endevina">
         <activity
+            android:name=".rankings"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

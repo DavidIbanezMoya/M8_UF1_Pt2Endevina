@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -15,10 +16,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
     int userTry = 0;
+    //ArrayLIST DE USERS CREAR CLASE USER
+    ArrayList<String>userList = new ArrayList<String>();
     //TextView logs = (TextView) findViewById(R.id.Logs);
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
         ranking.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Cambiar de pestana aqui
+                Intent rankIntent = new Intent(MainActivity.this, rankings.class);
+
+                startActivity(rankIntent);
                 //Se necesitara recuperar el nombre de usuario
             }
         });
@@ -94,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
             TextView logs = (TextView) findViewById(R.id.Logs);
             logs.setText("");
             //Les altres variables s han de posar globals com aquesta
-         }
-     }).setNegativeButton("Save and close", new DialogInterface.OnClickListener() {
-
-         public void onClick(DialogInterface dialogInterface, int i) {
-
          }
      });
 
