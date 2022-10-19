@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
     int userTry = 0;
     //ArrayLIST DE USERS CREAR CLASE USER
-    ArrayList<String>userList = new ArrayList<String>();
+    ArrayList<user>userList = new ArrayList<user>();
     //TextView logs = (TextView) findViewById(R.id.Logs);
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 //Cambiar de pestana aqui
                 Intent rankIntent = new Intent(MainActivity.this, rankings.class);
 
+                rankIntent.putExtra("Users",userList);
                 startActivity(rankIntent);
                 //Se necesitara recuperar el nombre de usuario
             }
@@ -85,28 +86,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //En void no hi ha problema pero no se com recuperar el nom que agafem de l usuari
- public EditText showDialog(){
+ public void showDialog(){
         //Para anadir el dialogo donde el usuario decidira si volver a jugar una nueva partida o no
      //Y que pueda guardar el campo del nombre de usuario
      AlertDialog.Builder builder = new AlertDialog.Builder(this);
      String message = "Congratulations";
-    final EditText name = new EditText(this);
+     final EditText name = new EditText(this);
+
 
      builder.setView(name).setMessage(message).setPositiveButton("Play again", new DialogInterface.OnClickListener() {
 
          public void onClick(DialogInterface dialogInterface, int i) {
+             String finalname = String.valueOf(name.getText());
+            user newUser = new user(finalname,userTry);
+            userList.add(newUser);
             number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
             userTry = 0;
             TextView numer = (TextView) findViewById(R.id.numero);
             numer.setText("");
             TextView logs = (TextView) findViewById(R.id.Logs);
             logs.setText("");
+
+             for (user user1: userList) {
+                 Log.i("Name",user1.getName());
+                 Log.i("Tries",Integer.toString(user1.getTries()));
+
+             }
+
             //Les altres variables s han de posar globals com aquesta
          }
      });
 
       builder.create().show();
-      return name;
  }
 }
 
